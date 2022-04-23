@@ -12,7 +12,10 @@ function Chat() {
   return (
     <div className='chat'>
         <div className="chat__header">
-            <Avatar />
+            <IconButton>
+                <Avatar />
+            </IconButton>
+            
             <div className="chat__headerInfo">
                 <h3>Room name</h3>
                 <p> lasst seen at...</p>
@@ -21,12 +24,6 @@ function Chat() {
             <div className="chat__headerRight">
                 <IconButton>
                     <SearchOutlined />
-                </IconButton>
-                <IconButton>
-                    <AttachFile />
-                </IconButton>
-                <IconButton>
-                    <MoreVert />
                 </IconButton>
             </div>
         </div>
@@ -60,6 +57,9 @@ function Chat() {
         </div>
         <div className="chat__footer">
             <InsertEmoticonIcon />
+            <IconButton>
+                    <AttachFile />
+            </IconButton>
             <form>
                 
                 <input placeholder='Type a message' type='text'/>

@@ -1,14 +1,20 @@
 .chat{
     display: flex;
     flex-direction: column;
-    flex: 0.65;
+    flex: 0.75;
 }
 
 .chat__header{
     display: flex;
-    padding: 20px;
+    padding: 18px;
     align-items: center;
     border-bottom: 1px solid lightgray;
+    background-color: #0c202b;
+}
+
+.chat__headerRight > .MuiIconButton-root
+{
+    color: rgb(255, 255, 255);
 }
 
 .chat__headerInfo{
@@ -19,15 +25,17 @@
 .chat__headerInfo > h3{
     margin-bottom: 3px;
     font-weight: 500;
+    color: white;
 }
 
 .chat__headerInfo > p{
-    color: gray;
+    color: rgb(170, 170, 170);
 }
 
 .chat__body{
     flex: 1;
-    background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+    background-image: url("https://wallpaperaccess.com/full/2224368.png");
+    background-size: 400px;
     background-repeat: repeat;
     background-position: center;
     padding: 30px;
@@ -40,8 +48,9 @@
     padding: 10px;
     width: fit-content;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #10332f;
     margin-bottom: 30px;
+    color: white;
 }
 
 .chat__timestamp{
@@ -50,7 +59,7 @@
 }
 .chat__reciever{
     margin-left: auto;
-    background-color: #dcf8c6;
+    background-color: #015d4b;
 }
 .chat__name{
     position: absolute;
@@ -65,6 +74,7 @@
     align-items: center;
     height: 62px;
     border-top: 1px solid lightgray;
+    background-color: #1f2c33;
 }
 
 .chat__footer > form{
@@ -85,5 +95,10 @@
 
 .chat__footer > .MuiSvgIcon-root{
     padding: 10px;
-    color: gray;
+    color: rgb(255, 255, 255);
+}
+
+.chat__footer > .MuiIconButton-root{
+    padding: 10px;
+    color: rgb(255, 255, 255);
 }
