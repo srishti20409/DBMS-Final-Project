@@ -15,7 +15,6 @@ function Chat() {
             <IconButton>
                 <Avatar />
             </IconButton>
-            
             <div className="chat__headerInfo">
                 <h3>Room name</h3>
                 <p> lasst seen at...</p>
