@@ -1,16 +1,21 @@
 import React from "react";
-import "./App.css";
-import Chat from "./Chat";
-import Sidebar from "./Sidebar";
+//import "./App.css";
+import Form from "./component/login/Form";
+import {BrowserRouter as Router ,Routes,  Route} from 'react-router-dom'
+import Main from "./component/main/Main.js"
 
 function App() {
   return (
-    <div className="app">
-      <div className="app__body">
-        <Sidebar />
-        <Chat />
-      </div>  
-    </div>
+    <div>
+      
+        <Routes>
+          <Route exact path= '/' element={<Main/>}/>
+          <Route exact path= '/form' element={<Form/>}/>
+        </Routes>
+      
+      {/* <Route exact path = "/form" component={Form}/> */}
+      
+  </div>    
   );
 }
 
