@@ -51,8 +51,8 @@ app.post("/register", (req, res) => {
     }
 
     db.query(
-      "INSERT INTO users (username, password) VALUES (?,?)",
-      [username, hash],
+      "INSERT INTO Login (username, password , username) VALUES (?,?)",
+      [username, hash , username],
       (err, result) => {
         console.log(err);
       }
@@ -73,7 +73,7 @@ app.post("/login", (req, res) => {
   const password = req.body.password;
 
   db.query(
-    "SELECT * FROM users WHERE username = ?;",
+    "SELECT * FROM Login WHERE idLogin = ?;",
     username,
     (err, result) => {
       if (err) {
@@ -81,7 +81,7 @@ app.post("/login", (req, res) => {
       }
 
       if (result.length > 0) {
-        bcrypt.compare(password, result[0].password, (error, response) => {
+        bcrypt.compare(OTP, result[0].OTP, (error, response) => {
           if (response) {
             req.session.user = result;
             console.log(req.session.user);
