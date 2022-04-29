@@ -1,102 +1,78 @@
-const express = require("express");
-const mysql = require("mysql");
-const cors = require("cors");
+//importing
+import express from 'express'
+import mysql from 'mysql'
+import cors from 'cors'
+//app config
+const app = express()
+const port = process.env.PORT || 3001
 
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
-
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-
-const app = express();
-
+app.use(cors());
 app.use(express.json());
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
-);
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(
-  session({
-    key: "userId",
-    secret: "subscribe",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      expires: 60 * 60 * 24,
-    },
-  })
-);
-
 const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "password",
-  database: "DBMS",
+    user:'root',
+    host:'localhost',
+    password:'password',
+    database: 'dbms',
 });
 
-app.post("/register", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    if (err) {
-      console.log(err);
-    }
-
-    db.query(
-      "INSERT INTO Login (username, password , username) VALUES (?,?)",
-      [username, hash , username],
-      (err, result) => {
-        console.log(err);
-      }
-    );
-  });
+app.post('/create',(req,res)=>{
+    const message= req.body.message;
+    const messegeSender = req.body.loggedinUser;
+    const messegeReceiver = req.body.contactID;
+    console.log(message+"   "+messegeSender+"  "+messegeReceiver);
+    const datetime=new Date().toISOString().split("T");
+    const dt = datetime[0]+" "+datetime[1].substring(0,8);
+    db.query("INSERT INTO message (idMESSAGE,MESSAGE_sent_time,SENDER_id,MESSAGE_text) VALUES (?,?,?,?)",[1,dt,messegeSender,message],(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("message details inserted into message");
+        }
+    });
+    db.query("INSERT INTO normal_chat (MESSAGE_idMESSAGE,MESSAGE_RECIVER_id,MESSAGE_SENDER_id) VALUES (?,?,?)",[1,messegeReceiver,messegeSender],(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("message details inserted into normal_chat");
+        }
+    });
 });
 
-app.get("/login", (req, res) => {
-  if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user });
-  } else {
-    res.send({ loggedIn: false });
-  }
-});
 
-app.post("/login", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  db.query(
-    "SELECT * FROM Login WHERE idLogin = ?;",
-    username,
-    (err, result) => {
-      if (err) {
-        res.send({ err: err });
-      }
-
-      if (result.length > 0) {
-        bcrypt.compare(OTP, result[0].OTP, (error, response) => {
-          if (response) {
-            req.session.user = result;
-            console.log(req.session.user);
+//SENDS list of users from DB to frontend(sidebar.js)
+app.get('/users',(req,res)=>{
+    db.query("SELECT * FROM user",(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
             res.send(result);
-          } else {
-            res.send({ message: "Wrong username/password combination!" });
-          }
-        });
-      } else {
-        res.send({ message: "User doesn't exist" });
-      }
-    }
-  );
+        }
+    });
+});
+//SENDS list of messages from DB to frontend(sidebarChat.js)
+app.get('/messages',(req,res)=>{
+    db.query("SELECT * FROM dbms.message as m JOIN normal_chat as n on m.idMESSAGE = n.MESSAGE_idMESSAGE where n.MESSAGE_SENDER_id = 4 or n.MESSAGE_RECIVER_id = 4 ",(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    });
 });
 
-app.listen(3001, () => {
-  console.log("running server");
-});
+
+//middleware
+
+//DB config
+
+//????
+
+//api routes
+// app.get('/',(req,res)=>res.status(200).send('hello world'))
+
+// //listen
+ app.listen(port,()=>console.log(`Listening on localhost:${port}`));

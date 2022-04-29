@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import {Link} from 'react-router-dom'
 
 function Login() {
     
@@ -61,7 +62,10 @@ return (
                 setPasswordReg(e.target.value);
             }}
             />
-            <button onClick={register}> Register </button>
+            {/* <button onClick={register}> Register </button> */}
+            <Link to='/'>
+            <button onClick={register} type="button" className="btn btn-info">Register</button>
+            </Link>
         </div>
 
         <div className="login">
@@ -80,7 +84,10 @@ return (
                 setPassword(e.target.value);
             }}
             />
-            <button onClick={login}> Login </button>
+            {/* <button onClick={login}> Login </button> */}
+            <Link to='/'>
+            <button onClick={login} type="button" className="btn btn-info">Login</button>
+            </Link>
         </div>
         <h1>{loginStatus}</h1>
     </div>

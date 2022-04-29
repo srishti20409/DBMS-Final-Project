@@ -4,7 +4,8 @@ import Form from "./component/login/Form";
 import {BrowserRouter as Router ,Routes,  Route} from 'react-router-dom'
 import Main from "./component/main/Main.js"
 import Login from "./component/login/login";
-
+import io from 'socket.io-client'
+//const socket = io.connect("http://localhost:3001")
 function App() {
   return (
     <div>

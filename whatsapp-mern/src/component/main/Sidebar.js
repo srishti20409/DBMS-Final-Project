@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import "./Sidebar.css";
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import ChatIcon from "@mui/icons-material/Chat";
@@ -6,8 +6,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Avatar, IconButton } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from "./SidebarChat";
+import Axios from "axios";
+import { useState } from "react";
 
-function Sidebar() {
+function Sidebar(props) {
+  
+  const loggedinUser = 4;
   return (
     <div className="sidebar">
       <div className="sidebar__header">
@@ -33,9 +37,13 @@ function Sidebar() {
           </div>
       </div>
       <div className="sidebar__chats">
-          <SidebarChat />
-          <SidebarChat />
-          <SidebarChat />
+          {props.userList.map((val,key)=>
+          {
+            if(val.idUSER!=loggedinUser)
+            return(<SidebarChat val={val} displayMessages={props.displayMessages}/>)
+          })
+          }
+
       </div>
     </div>
   );
