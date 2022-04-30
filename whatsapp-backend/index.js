@@ -101,7 +101,6 @@ app.get('/messages',(req,res)=>{
         }
     });
 });
-
 app.get('/allmessages',(req,res)=>{
     db.query("SELECT * FROM dbms.message",(err,result)=>{
         if(err){

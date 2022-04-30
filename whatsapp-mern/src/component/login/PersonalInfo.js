@@ -13,10 +13,10 @@ function PersonalInfo({ Info,setInfo }) {
       />
       <input
         type="text"
-        placeholder="Description"
-        value={Info.Description}
+        placeholder="Desciption"
+        value={Info.Desciption}
         onChange={(e) => {
-         setInfo({ ...Info, Description: e.target.value });
+         setInfo({ ...Info, Desciption: e.target.value });
         }}
       />
       <input

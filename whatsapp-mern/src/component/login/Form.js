@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import SignUpInfo from "./SignUpInfo";
 import PersonalInfo from "./PersonalInfo";
-import OtherInfo from "./OtherInfo";
-import "./login.css"
+import "./Form.css"
 import { Axios } from "axios";
 import { SettingsSuggestRounded } from "@mui/icons-material";
 
@@ -16,15 +15,26 @@ function Form() {
     Picture: "",
   })
 
-  // const adduser = () => {
-  //   Axios.post("https://localhost:3001/create",{
-  //     Name: Name,
-  //     phone: phone,
-  //     Desciption: Desciption,
-  //     pic: pic,
+  // Axios.post('http://localhost:3000/login', Info)
+  //   .then(response => {
+  //     console.log(res.data)
   //   })
-  // }
 
+  function submit(e)
+  {
+    e.preventDefault();
+    const adduser = () => {
+      Axios.post("https://localhost:3001/login",{
+        Name: Info.Name,
+        Phone: Info.Phone,
+        Desciption: Info.Desciption,
+        Picture: Info.Picture,
+      })
+      .then(res=>{
+        console.log(res.data)
+      })
+    }
+  }
   const FormTitles = ["Login", "Personal Info"];
 
   const PageDisplay = () => {
