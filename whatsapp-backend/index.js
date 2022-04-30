@@ -7,7 +7,7 @@ import http from 'http'
 import { Server } from "socket.io";
 
 
-
+const loggedinUser=4;
 ///////////////////////////////////////////////////////////
 //app config
 const app = express()
@@ -39,7 +39,16 @@ io.on("connection", (socket) => {
     });
   
     socket.on("send_message", (data) => {
-        console.log("a message was sent = ",data.text);
+        console.log("while receiving = ", data.RECIVER_id);
+        db.query("INSERT INTO one_one (idMESSAGE,SENDER_id,RECIVER_id,text,sent_time) VALUES (?,?,?,?,?)",[data.idMESSAGE,data.SENDER_id,data.RECIVER_id,data.text,data.sent_time],(err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("message details inserted into database in tabel one_one");
+            }
+        })
+        
         socket.to(4).emit("receive_message", data);
     });
 
@@ -92,7 +101,7 @@ app.get('/users',(req,res)=>{
 });
 //SENDS list of messages from DB to frontend(sidebarChat.js)
 app.get('/messages',(req,res)=>{
-    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time FROM one_one as m where m.SENDER_id = 4 or m.RECIVER_id = 4",(err,result)=>{
+    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time,ATTACHMENT FROM one_one as m where m.SENDER_id = "+loggedinUser+" or m.RECIVER_id = "+loggedinUser,(err,result)=>{
         if(err){
             console.log(err);
         }
