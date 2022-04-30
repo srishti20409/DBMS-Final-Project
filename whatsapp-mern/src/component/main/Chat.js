@@ -23,20 +23,17 @@ function Chat(props) {
   const [messageList, setMessageList] = useState([]);
   
   const sendMessage = async () =>  {
-    let len = props.messages.length;
-    let lastmessage = props.messages[len-1];
-    let lastmessageId = lastmessage.idMESSAGE;
-    if(messageList.length>=1 && messageList[messageList.length-1].idMESSAGE>=lastmessageId){
-      lastmessageId=messageList[messageList.length-1].idMESSAGE;
-    }
+    
     if(message!==""){
       const messageData = {
-        idMESSAGE: lastmessageId+1,
-        MESSAGE_SENDER_id: loggedinUser,
-        MESSAGE_RECIVER_id: props.contactID,
-        MESSAGE_text: message,
-        MESSAGE_sent_time:new Date(Date.now()).getHours()+":"+new Date(Date.now()).getMinutes(),
+        idMESSAGE: null,
+        SENDER_id: loggedinUser,
+        RECIVER_id: props.contactID,
+        text: message,
+        sent_time:new Date(Date.now()).getHours()+":"+new Date(Date.now()).getMinutes(),
+        displayed: false,
       };
+    
       await props.socket.emit("send_message",messageData);
       setMessageList((list) => [...list, messageData]);
       setMessage("");
@@ -51,8 +48,9 @@ function Chat(props) {
   // })
   useEffect(() => {
     props.socket.on("receive_message", (data) => {
-      console.log("a message was recieved");
+      
       setMessageList((list) => [...list, data]);
+      console.log("a message was recieved");
     });
   }, [props.socket]);
 
@@ -81,16 +79,16 @@ function Chat(props) {
       <div className="chat__body">
 
         {props.personalMessages.map((val,key)=>{
-          
+            
           {
-            if(val.MESSAGE_SENDER_id==loggedinUser && val.MESSAGE_RECIVER_id==props.contactID)
-          {
+            if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
+          {console.log("should display a message");
           return(<p key={val.idMESSAGE} className="chat__message chat__reciever">
-          <span className="chat__name">{val.MESSAGE_SENDER_id}</span>
-          {val.MESSAGE_text}
-          <span className="chat__timestamp">{val.MESSAGE_sent_time}</span>
+          <span className="chat__name"></span>
+          {val.text}
+          <span className="chat__timestamp">{val.sent_time}</span>
         </p>)}
-        else if(val.MESSAGE_SENDER_id==props.contactID){
+        else if(val.SENDER_id==props.contactID){
           
           props.userList.map((v,k)=>{
             if(props.contactID==v.idUSER){
@@ -99,8 +97,8 @@ function Chat(props) {
           })
           return(<p key={val.idMESSAGE} className="chat__message">
           <span className="chat__name">{clickedContact.USER_name}</span>
-          {val.MESSAGE_text}
-          <span className="chat__timestamp">{val.MESSAGE_sent_time}</span>
+          {val.text}
+          <span className="chat__timestamp">{val.sent_time}</span>
         </p>)
         }}
         })}
@@ -108,15 +106,15 @@ function Chat(props) {
 
         {messageList.map((val,key)=>{
           
-          {if(val.MESSAGE_SENDER_id==loggedinUser && val.MESSAGE_RECIVER_id==props.contactID)
-          {
+          {if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
+          {val.displayed=true;
           return(<p key={val.idMESSAGE} className="chat__message chat__reciever">
-          <span className="chat__name">{val.MESSAGE_SENDER_id}</span>
-          {val.MESSAGE_text}
-          <span className="chat__timestamp">{val.MESSAGE_sent_time}</span>
+          <span className="chat__name">{val.SENDER_id}</span>
+          {val.text}
+          <span className="chat__timestamp">{val.sent_time}</span>
         </p>)}
-        else if(val.MESSAGE_SENDER_id==props.contactID){
-          
+        else if( val.SENDER_id==props.contactID){
+          val.displayed=true;
           props.userList.map((v,k)=>{
             if(props.contactID==v.idUSER){
               clickedContact = v;
@@ -124,8 +122,8 @@ function Chat(props) {
           })
           return(<p key={val.idMESSAGE} className="chat__message">
           <span className="chat__name">{clickedContact.USER_name}</span>
-          {val.MESSAGE_text}
-          <span className="chat__timestamp">{val.MESSAGE_sent_time}</span>
+          {val.text}
+          <span className="chat__timestamp">{val.sent_time}</span>
         </p>)
         }}
         })} 
