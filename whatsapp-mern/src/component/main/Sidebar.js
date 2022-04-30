@@ -6,8 +6,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Avatar, IconButton } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from "./SidebarChat";
-import Axios from "axios";
-import { useState } from "react";
 
 function Sidebar(props) {
   

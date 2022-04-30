@@ -5,7 +5,6 @@ import './SidebarChat.css'
 
 function SidebarChat(props) {
   const displayMessage=()=>{
-    console.log("Inidebar chaattt");
     props.displayMessages(props.val.idUSER);
   }
   return (
