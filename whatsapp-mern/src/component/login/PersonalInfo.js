@@ -1,30 +1,30 @@
 import React from "react";
 
-function PersonalInfo({ formData, setFormData }) {
+function PersonalInfo({ Info,setInfo }) {
   return (
     <div className="personal-info-container">
       <input
         type="text"
-        placeholder="First Name..."
-        value={formData.firstName}
+        placeholder="Name."
+        value={Info.Name}
         onChange={(e) => {
-          setFormData({ ...formData, firstName: e.target.value });
+         setInfo({ ...Info, Name: e.target.value });
         }}
       />
       <input
         type="text"
-        placeholder="Last Name..."
-        value={formData.lastName}
+        placeholder="Description"
+        value={Info.Description}
         onChange={(e) => {
-          setFormData({ ...formData, lastName: e.target.value });
+         setInfo({ ...Info, Description: e.target.value });
         }}
       />
       <input
         type="text"
-        placeholder="Username..."
-        value={formData.username}
+        placeholder="Picture"
+        value={Info.Picture}
         onChange={(e) => {
-          setFormData({ ...formData, username: e.target.value });
+         setInfo({ ...Info, Picture: e.target.value });
         }}
       />
     </div>
