@@ -78,6 +78,26 @@ io.on("connection", (socket) => {
 //     });
 // });
 
+// adds new user
+app.post("http://localhost:3001/login", (req, res) => {
+    const Name = req.body.Name;
+    const Phone = req.body.Phone;
+    const Desciption = req.body.Desciption;
+    const Picture = req.body.Picture;
+  
+    db.query(
+      "INSERT INTO USER (USER_phone_number, USER_name, USER_decription, USER_pic) VALUES (?,?,?,?)",
+      [Name, Phone, Desciption, Picture],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send("Values Inserted");
+        }
+      }
+    );
+  });
+////
 
 //SENDS list of users from DB to frontend(sidebar.js)
 app.get('/users',(req,res)=>{
