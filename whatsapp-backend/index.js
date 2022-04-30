@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     });
   
     socket.on("send_message", (data) => {
-        console.log("a message was sent = ",data.MESSAGE_text);
+        console.log("a message was sent = ",data.text);
         socket.to(4).emit("receive_message", data);
     });
 
@@ -81,7 +81,7 @@ io.on("connection", (socket) => {
 
 //SENDS list of users from DB to frontend(sidebar.js)
 app.get('/users',(req,res)=>{
-    db.query("SELECT * FROM user",(err,result)=>{
+    db.query("SELECT * FROM dbms.user",(err,result)=>{
         if(err){
             console.log(err);
         }
@@ -92,17 +92,18 @@ app.get('/users',(req,res)=>{
 });
 //SENDS list of messages from DB to frontend(sidebarChat.js)
 app.get('/messages',(req,res)=>{
-    db.query("SELECT idMESSAGE,MESSAGE_SENDER_id,MESSAGE_RECIVER_id,MESSAGE_text,MESSAGE_sent_time FROM dbms.message as m JOIN normal_chat as n on m.idMESSAGE = n.MESSAGE_idMESSAGE where n.MESSAGE_SENDER_id = 4 or n.MESSAGE_RECIVER_id = 4 ",(err,result)=>{
+    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time FROM one_one as m where m.SENDER_id = 4 or m.RECIVER_id = 4",(err,result)=>{
         if(err){
             console.log(err);
         }
         else{
+            
             res.send(result);
         }
     });
 });
 app.get('/allmessages',(req,res)=>{
-    db.query("SELECT * FROM dbms.message",(err,result)=>{
+    db.query("SELECT * FROM dbms.one_one",(err,result)=>{
         if(err){
             console.log(err);
         }

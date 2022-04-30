@@ -18,25 +18,28 @@ function Main() {
     
     const displayMessages= (userId)=>{
       console.log("inside main getting messages ",userId);
-      //console.log(contactID);
+      console.log("clicked use = ",contactID);
       Axios.get("http://localhost:3001/messages").then((response) => {
           setpersonalMessages(response.data);
+          
         });
       contactID=userId;
       // socket.emit("user_clicked",contactID);
     }
     useEffect(() => {
-      socket.emit("join_room",4);
+      socket.emit("join_room",4)
       Axios.get("http://localhost:3001/allmessages").then((response) => {
         setMessages(response.data);
       });
     }, []);
+
   //GETT all USERS in a list to display on sidebar
   const [userList, setUserList] = useState([]);
   
   useEffect(() => {
     Axios.get("http://localhost:3001/users").then((response) => {
       setUserList(response.data);
+      
     });
   }, []);
 
