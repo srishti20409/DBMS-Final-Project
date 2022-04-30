@@ -4,6 +4,7 @@ import PersonalInfo from "./PersonalInfo";
 import "./Form.css"
 import { Axios } from "axios";
 import { SettingsSuggestRounded } from "@mui/icons-material";
+import { Link } from 'react-router-dom';
 
 function Form() {
   const [page, setPage] = useState(0);
@@ -20,11 +21,10 @@ function Form() {
   //     console.log(res.data)
   //   })
 
-  function submit(e)
-  {
-    e.preventDefault();
-    const adduser = () => {
-      Axios.post("https://localhost:3001/login",{
+  function abc(){
+  const sendUser = () => 
+   {
+      Axios.post("https://localhost:3000/login",{
         Name: Info.Name,
         Phone: Info.Phone,
         Desciption: Info.Desciption,
@@ -35,6 +35,7 @@ function Form() {
       })
     }
   }
+
   const FormTitles = ["Login", "Personal Info"];
 
   const PageDisplay = () => {
@@ -64,11 +65,15 @@ function Form() {
             >
               Prev
             </button>
-            <button
-              onClick={() => {
+
+
+            <button onClick= {() => {
                 if (page === FormTitles.length - 1) {
                   alert("FORM SUBMITTED");
                   console.log(Info);
+                  abc();
+                  // href = 'http://localhost:3000/';
+                  //location.href='http://localhost:3000/';
                 } else {
                   setPage((currPage) => currPage + 1);
                 }
