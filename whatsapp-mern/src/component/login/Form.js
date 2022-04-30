@@ -6,6 +6,12 @@ import "./login.css"
 
 function Form() {
   const [page, setPage] = useState(0);
+  const [phone, setPhone] = useState("");
+  const [Name, setName] = useState("");
+  const [Desciption, setDescription] = useState("");
+  const [pic , setPic] = useState("");
+
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,7 +23,7 @@ function Form() {
     other: "",
   });
 
-  const FormTitles = ["Sign Up", "Personal Info", "Other"];
+  const FormTitles = ["Login", "Personal Info", "Other"];
 
   const PageDisplay = () => {
     if (page === 0) {
