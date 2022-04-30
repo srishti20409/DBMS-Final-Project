@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import SignUpInfo from "./SignUpInfo";
 import PersonalInfo from "./PersonalInfo";
-import OtherInfo from "./OtherInfo";
-import "./login.css"
+import "./Form.css"
 import { Axios } from "axios";
 import { SettingsSuggestRounded } from "@mui/icons-material";
+import { Link } from 'react-router-dom';
 
 function Form() {
   const [page, setPage] = useState(0);
@@ -16,14 +16,25 @@ function Form() {
     Picture: "",
   })
 
-  // const adduser = () => {
-  //   Axios.post("https://localhost:3001/create",{
-  //     Name: Name,
-  //     phone: phone,
-  //     Desciption: Desciption,
-  //     pic: pic,
+  // Axios.post('http://localhost:3000/login', Info)
+  //   .then(response => {
+  //     console.log(res.data)
   //   })
-  // }
+
+  function abc(){
+  const sendUser = () => 
+   {
+      Axios.post("https://localhost:3000/login",{
+        Name: Info.Name,
+        Phone: Info.Phone,
+        Desciption: Info.Desciption,
+        Picture: Info.Picture,
+      })
+      .then(res=>{
+        console.log(res.data)
+      })
+    }
+  }
 
   const FormTitles = ["Login", "Personal Info"];
 
@@ -54,11 +65,15 @@ function Form() {
             >
               Prev
             </button>
-            <button
-              onClick={() => {
+
+
+            <button onClick= {() => {
                 if (page === FormTitles.length - 1) {
                   alert("FORM SUBMITTED");
                   console.log(Info);
+                  abc();
+                  // href = 'http://localhost:3000/';
+                  //location.href='http://localhost:3000/';
                 } else {
                   setPage((currPage) => currPage + 1);
                 }
