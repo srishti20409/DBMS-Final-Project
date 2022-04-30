@@ -17,6 +17,7 @@ import Axios from "axios";
 // }
 const loggedinUser = 4;
 var clickedContact;
+var clicked = false;
 function Chat(props) {
  //----------------------------TAKING message input on chat and sending to backend------------ 
   const [message, setMessage] = useState("");
@@ -24,17 +25,25 @@ function Chat(props) {
   
   const sendMessage = async () =>  {
     
+    let len = props.messages.length;
+    let lastmessage = props.messages[len-1];
+    let lastmessageId = lastmessage.idMESSAGE;
+    if(messageList.length>=1 && messageList[messageList.length-1].idMESSAGE>=lastmessageId){
+      lastmessageId=messageList[messageList.length-1].idMESSAGE;
+    }
     if(message!==""){
+      
       const messageData = {
-        idMESSAGE: null,
+        idMESSAGE: lastmessageId+1,
         SENDER_id: loggedinUser,
-        RECIVER_id: props.contactID,
+        RECIVER_id: clickedContact.idUSER,
         text: message,
-        sent_time:new Date(Date.now()).getHours()+":"+new Date(Date.now()).getMinutes(),
+        sent_time:new Date(Date.now()).toISOString().split('T')[0]+" "+new Date(Date.now()).getHours()+":"+new Date(Date.now()).getMinutes(),
         displayed: false,
       };
-    
       await props.socket.emit("send_message",messageData);
+      props.displayMessages(messageData.RECIVER_id);
+      messageData.displayed=true;
       setMessageList((list) => [...list, messageData]);
       setMessage("");
     }
@@ -49,46 +58,76 @@ function Chat(props) {
   useEffect(() => {
     props.socket.on("receive_message", (data) => {
       
+      props.displayMessages(data.RECIVER_id);
+      
       setMessageList((list) => [...list, data]);
+      
       console.log("a message was recieved");
     });
   }, [props.socket]);
 
   //----------------------------------------------------------
-  
+    var header=<div className="chat__header">
+    <IconButton>
+      <Avatar />
+    </IconButton>
+    <div className="chat__headerInfo">
+      <h3>Name</h3>
+      <p> last seen at...</p>
+    </div>
+
+    <div className="chat__headerRight">
+      <IconButton>
+        <SearchOutlined />
+      </IconButton>
+    </div>
+  </div>;
+
+  if(clicked==true){
+    header = <div className="chat__header">
+    <IconButton>
+      <Avatar />
+    </IconButton>
+    <div className="chat__headerInfo">
+      <h3>{clickedContact.USER_name}</h3>
+      <p> lasst seen at...</p>
+    </div>
+
+    <div className="chat__headerRight">
+      <IconButton>
+        <SearchOutlined />
+      </IconButton>
+    </div>
+  </div>
+  }
+
   return (
     
     <div className="chat">
      
-      <div className="chat__header">
-        <IconButton>
-          <Avatar />
-        </IconButton>
-        <div className="chat__headerInfo">
-          <h3>NAME</h3>
-          <p> lasst seen at...</p>
-        </div>
-
-        <div className="chat__headerRight">
-          <IconButton>
-            <SearchOutlined />
-          </IconButton>
-        </div>
-      </div>
+      {header}
 
       <div className="chat__body">
 
         {props.personalMessages.map((val,key)=>{
             
+          {clicked=true;
+            var attach = <img src=""/>
+            
+            if(val.ATTACHMENT!=null){
+              attach = <img src={val.ATTACHMENT} alt="IMAGE"/>
+            }
+          if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
           {
-            if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
-          {console.log("should display a message");
           return(<p key={val.idMESSAGE} className="chat__message chat__reciever">
           <span className="chat__name"></span>
           {val.text}
+          {attach}
           <span className="chat__timestamp">{val.sent_time}</span>
-        </p>)}
-        else if(val.SENDER_id==props.contactID){
+          
+          </p>)}
+
+          else if(val.SENDER_id==props.contactID){
           
           props.userList.map((v,k)=>{
             if(props.contactID==v.idUSER){
@@ -104,7 +143,7 @@ function Chat(props) {
         })}
 
 
-        {messageList.map((val,key)=>{
+        {/* {messageList.map((val,key)=>{
           
           {if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
           {val.displayed=true;
@@ -126,13 +165,13 @@ function Chat(props) {
           <span className="chat__timestamp">{val.sent_time}</span>
         </p>)
         }}
-        })} 
+        })}  */}
       
 
       </div>
       <div className="chat__footer">
         <InsertEmoticonIcon />
-        <IconButton>
+        <IconButton >
           <AttachFile />
         </IconButton>
         

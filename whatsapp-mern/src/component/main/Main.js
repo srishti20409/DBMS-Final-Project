@@ -17,11 +17,9 @@ function Main() {
   const loggedinUser = 4;
     
     const displayMessages= (userId)=>{
-      console.log("inside main getting messages ",userId);
-      console.log("clicked use = ",contactID);
+      console.log("clicked user = ",contactID);
       Axios.get("http://localhost:3001/messages").then((response) => {
           setpersonalMessages(response.data);
-          
         });
       contactID=userId;
       // socket.emit("user_clicked",contactID);
@@ -53,7 +51,7 @@ function Main() {
         
         <Sidebar displayMessages={displayMessages} userList={userList}/>
         
-        <Chat messages={messages} personalMessages={personalMessages} userList={userList} contactID={contactID} socket={socket}/>
+        <Chat messages={messages} displayMessages={displayMessages} personalMessages={personalMessages} userList={userList} contactID={contactID} socket={socket}/>
         </div>  
     </div>
   )
