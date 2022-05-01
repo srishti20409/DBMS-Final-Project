@@ -70,10 +70,17 @@ function Chat(props) {
   }, [props.socket]);
 
   useEffect(()=>{
-    console.log("logged in user in CHAT.js ",props.loggedinUser);
+   
     loggedinUser = props.loggedinUser.idUSER;
-    console.log("logged in user in CHAT.js later",props.loggedinUser);
+
   },[props.loggedinUser])
+
+  useEffect(()=>{
+    clicked=props.clicked;
+  },[props.clicked]);
+
+  console.log("VALUE OF LOGGED IN USER = ",props.loggedinUser);
+
   //----------------------------------------------------------
     var header=<div className="chat__header">
     <IconButton>
@@ -92,6 +99,11 @@ function Chat(props) {
   </div>;
 
   if(clicked==true){
+    props.userList.map((val)=>{
+      if(val.idUSER==props.contactID){
+        clickedContact=val;
+      }
+    })
     header = <div className="chat__header">
     <IconButton>
       <Avatar />

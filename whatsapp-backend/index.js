@@ -7,16 +7,7 @@ import http from 'http'
 import { Server } from "socket.io";
 
 
-var loggedinUser={
-  idUSER: 1,
-  USER_phone_number: '9717807100',
-  USER_name: 'ritick',
-  USER_decription: 'HAF',
-  USER_pic: null,
-  USER_online_status: 0,
-  USER_last_seen: null,
-  USER_privacy: null
-} ;
+var loggedinUser;
 
 ///////////////////////////////////////////////////////////
 //app config
@@ -106,7 +97,7 @@ io.on("connection", (socket) => {
 
 // adds new user
 
-
+let lg;
 app.post('/login1', async (req, res) => {
     const Name = req.body.Name;
     const Phone = req.body.Phone;
@@ -125,23 +116,22 @@ app.post('/login1', async (req, res) => {
         }
       }
     );
-      
+    
     await db.query("SELECT * from user as u where u.USER_phone_number = "+Phone,(err,result)=>{
       if(err){
         console.log(err);
       }
       else{
         console.log(result);
-        loggedinUser = result;
+        loggedinUser=result;
         console.log("USER logged in, ",loggedinUser);
+        lg=loggedinUser[0].idUSER;
       }
     })
     app.get('/setloggedin',(req,res)=>{
       res.send(loggedinUser);
-      console.log("logged in was set in index.js",loggedinUser);
+      console.log("logged in was set in index.js",lg);
     });
-    
-
   });
 ////
 
@@ -159,12 +149,12 @@ app.get('/users',(req,res)=>{
 });
 //SENDS list of messages from DB to frontend(sidebarChat.js)
 app.get('/messages',(req,res)=>{
-    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time FROM one_one as m where m.SENDER_id = "+loggedinUser.idUSER+" or m.RECIVER_id = "+loggedinUser.idUSER,(err,result)=>{
+    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time FROM one_one as m where m.SENDER_id = "+lg+" or m.RECIVER_id = "+lg,(err,result)=>{
         if(err){
             console.log(err);
         }
         else{
-            
+            console.log("got messages , ",result);
             res.send(result);
         }
     });

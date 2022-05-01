@@ -9,7 +9,7 @@ const socket = io.connect("http://localhost:3002");//socket.io on 3002
 
 
 var contactID;
-
+var clicked=false;
 //default logged in user
 var loggedinUser={
   idUSER: (0),
@@ -40,6 +40,7 @@ function Main() {
           setpersonalMessages(response.data);
         });
       contactID=userId;
+      clicked=true;
       // socket.emit("user_clicked",contactID);
 }
     useEffect(() => {
@@ -64,7 +65,7 @@ function Main() {
   //gets the logged in user details
   useEffect(()=>{
         Axios.get("http://localhost:3001/setloggedin").then((response)=>{
-        loggedinUser=response.data;
+        loggedinUser=response.data[0];
         console.log("logged in was set in Main.js",loggedinUser);
       });
   },[])
@@ -75,7 +76,7 @@ function Main() {
     <div className='main'> 
         <div className="Main__body">
         <Sidebar displayMessages={displayMessages} userList={userList} loggedinUser={loggedinUser}/>
-        <Chat messages={messages} displayMessages={displayMessages} loggedinUser={loggedinUser} personalMessages={personalMessages} userList={userList} contactID={contactID} socket={socket}/>
+        <Chat messages={messages} clicked={clicked} displayMessages={displayMessages} loggedinUser={loggedinUser} personalMessages={personalMessages} userList={userList} contactID={contactID} socket={socket}/>
         </div>  
     </div>
   )

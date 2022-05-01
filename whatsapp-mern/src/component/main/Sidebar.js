@@ -7,16 +7,18 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from "./SidebarChat";
 import AddIcon from '@mui/icons-material/Add';
 // import { Link } from "react-router-dom";
-var loggedinUser=(0);
-
+var loggedinUser;
+var userloggedin = false;
 function Sidebar(props) {
   
   useEffect(()=>{
-    console.log("inside sidebar ",props.loggedinUser);
+    
     loggedinUser = props.loggedinUser.idUSER;
+    userloggedin=true;
+    console.log("inside sidebar ",loggedinUser);
   },[props.loggedinUser])
 
-  return (
+  {if(userloggedin==true){return (
     <div className="sidebar">
       <div className="sidebar__header">
         <IconButton>
@@ -38,17 +40,21 @@ function Sidebar(props) {
               <input placeholder="Search or start new chat" type="text" />
           </div>
       </div>
+      
       <div className="sidebar__chats">
+          
           {props.userList.map((val,key)=>
-          {
-            if(val.idUSER!=loggedinUser)
+          
+          { console.log("helloooo ",loggedinUser);
+            if(val.idUSER!=props.loggedinUser.idUSER)
             return(<SidebarChat val={val} displayMessages={props.displayMessages}/>)
           })
+          
           }
 
       </div>
     </div>
-  );
+  );}}
 }
 
 export default Sidebar;
