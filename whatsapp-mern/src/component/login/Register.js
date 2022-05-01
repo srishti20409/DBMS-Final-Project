@@ -13,6 +13,7 @@ function Form()
     Desciption: "",
     Picture: "",
     Login: (1),
+    Date: new Date(Date.now()).toISOString().split('T')[0]+" "+new Date(Date.now()).getHours()+":"+new Date(Date.now()).getMinutes(),
   })
 
   const addUser=() =>{
@@ -23,6 +24,7 @@ function Form()
       Desciption: Info.Desciption,
       Picture: Info.Picture,
       Login: Info.Login,
+      Date: Info.Date,
       })
       .then(res=>{
         console.log(res.data)

@@ -9,6 +9,7 @@ function Create_Group()
         Name: "",
         Desciption: "",
         Picture: "",
+        
       })
     return (
         <div className='main2'>  

@@ -9,11 +9,6 @@ function List
 () {
     
     const [MemberList, setMemberList] = useState([]);
-    
-    
-    
-    
-    
     const [userList, setUserList] = useState([]);
     useEffect(() => {
       Axios.get("http://localhost:3001/users").then((response) => {

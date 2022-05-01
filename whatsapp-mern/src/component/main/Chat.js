@@ -30,6 +30,7 @@ function Chat(props) {
     let len = props.messages.length;
     let lastmessage = props.messages[len-1];
     let lastmessageId = lastmessage.idMESSAGE;
+    
     if(messageList.length>=1 && messageList[messageList.length-1].idMESSAGE>=lastmessageId){
       lastmessageId=messageList[messageList.length-1].idMESSAGE;
     }

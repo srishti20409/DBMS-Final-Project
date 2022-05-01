@@ -96,7 +96,7 @@ io.on("connection", (socket) => {
 
 
 // adds new user
-
+//post - insert into data base
 let lg;
 app.post('/login1', async (req, res) => {
     const Name = req.body.Name;
@@ -104,10 +104,10 @@ app.post('/login1', async (req, res) => {
     const Desciption = req.body.Desciption;
     const Picture = req.body.Picture;
     const Login = req.body.Login;
-  
+    const Date = req.body.Date;
     db.query(
-      "INSERT INTO USER ( USER_name, USER_phone_number, USER_decription, USER_pic , USER_online_status) VALUES (?,?,?,?,?)",
-      [Name, Phone, Desciption, Picture, Login],
+      "INSERT INTO USER ( USER_name, USER_phone_number, USER_decription, USER_pic , USER_online_status , USER_last_seen) VALUES (?,?,?,?,?,?)",
+      [Name, Phone, Desciption, Picture, Login , Date],
       (err, result) => {
         if (err) {
           console.log(err);
@@ -116,7 +116,7 @@ app.post('/login1', async (req, res) => {
         }
       }
     );
-    
+
     await db.query("SELECT * from user as u where u.USER_phone_number = "+Phone,(err,result)=>{
       if(err){
         console.log(err);
