@@ -89,10 +89,11 @@ app.post('/login', (req, res) => {
     const Phone = req.body.Phone;
     const Desciption = req.body.Desciption;
     const Picture = req.body.Picture;
+    const login = req.body.Login;
   
     db.query(
-      "INSERT INTO USER ( USER_name, USER_phone_number, USER_decription, USER_pic) VALUES (?,?,?,?)",
-      [Name, Phone, Desciption, Picture],
+      "INSERT INTO USER ( USER_name, USER_phone_number, USER_decription, USER_pic , USER_online_status) VALUES (?,?,?,?,?)",
+      [Name, Phone, Desciption, Picture,Login],
       (err, result) => {
         if (err) {
           console.log(err);

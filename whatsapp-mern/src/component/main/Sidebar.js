@@ -1,11 +1,12 @@
-import React,{ useEffect } from "react";
+import React,{ useEffect} from "react";
 import "./Sidebar.css";
-import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import ChatIcon from "@mui/icons-material/Chat";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Avatar, IconButton } from "@mui/material";
+import { Avatar, IconButton, Link } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from "./SidebarChat";
+import AddIcon from '@mui/icons-material/Add';
+// import { Link } from "react-router-dom";
 
 function Sidebar(props) {
   
@@ -17,8 +18,8 @@ function Sidebar(props) {
           <Avatar src="https://avatars.githubusercontent.com/u/20063?v=4" />
         </IconButton>
         <div className="sidebar__headerRight">
-          <IconButton>
-            <DonutLargeIcon />
+          <IconButton href="http://localhost:3000/creategroup"  rel="noopener noreferrer">
+            <AddIcon/>
           </IconButton>
           <IconButton>
             <ChatIcon />

@@ -6,9 +6,8 @@ import Landingpage from "./component/login/Landingpage";
 import Register from "./component/login/Register";
 import Login from "./component/login/Login";
 import Create_Group from "./component/Groups/Create_Group.js";
-import Application from "./component/Groups/Application.js";
-import Usrlist from "./component/Groups/Usrlist.js";
-
+import List
+ from "./component/Groups/List.js";
 import io from 'socket.io-client'
 //const socket = io.connect("http://localhost:3001")
 function App() {
@@ -21,7 +20,7 @@ function App() {
           <Route exact path= '/register' element={<Register/>}/>
           <Route exact path= '/login' element={<Login/>}/>
           <Route exact path= '/creategroup' element = {<Create_Group/>}/>
-          <Route exact path= '/usrlist' element = {<Usrlist/>}/>
+          <Route exact path="/list" element = {<List/>}/>
         </Routes>
       
       {/* <Route exact path = "/form" component={Form}/> */}

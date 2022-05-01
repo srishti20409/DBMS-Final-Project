@@ -1,4 +1,4 @@
-.main{
+.main2{
     display: grid;
     place-items: center;
     height: 100vh;
@@ -7,7 +7,7 @@
   }
   
   
-  .Main__body{
+  .Main__body2{
       display: flex;
       background-color: #eaeaea;
       margin-top: 0px;
@@ -40,18 +40,18 @@
         flex-direction: column;
       } */
       
-      .Main__body .header {
+      .Main__body2 .header {
         flex: 15%;
         display: grid;
         place-items: center;
         font-size: larger;
       }
       
-      .Main__body .body {
+      .Main__body2 .body {
         flex: 70%;
       }
       
-      .Main__body .footer {
+      .Main__body2 .footer {
         flex: 15%;
         display: flex;
         justify-content: center;
@@ -87,7 +87,7 @@
         
       }
       
-      .Main__body .footer button {
+      .Main__body2 .footer button {
         width: 200px;
         height: 80px;
         background-color: #243f45;

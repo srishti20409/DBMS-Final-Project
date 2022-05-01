@@ -1,6 +1,7 @@
 import React , {useState} from 'react';
 import "./group.css"
 import { Link } from 'react-router-dom';
+import "./style.css";
 
 function Create_Group() 
 {
@@ -10,8 +11,8 @@ function Create_Group()
         Picture: "",
       })
     return (
-        <div className='main'>  
-            <div className="Main__body">
+        <div className='main2'>  
+            <div className="Main__body2">
                     <div className="header">
                     <h1>Create Group</h1>
                     </div>
@@ -47,10 +48,9 @@ function Create_Group()
 
                     <div className="footer">
                     <button >
-                    <Link to = "/userlist" style={{ color: 'inherit', textDecoration: 'inherit'}}>Next</Link>
+                    <Link to = "/list" style={{ color: 'inherit', textDecoration: 'inherit'}}>Next</Link>
                     </button>
-
-    </div>
+                    </div>
             </div>
         </div>       
   )

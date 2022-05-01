@@ -12,6 +12,7 @@ function Form()
     Name: "",
     Desciption: "",
     Picture: "",
+    Login: (1),
   })
 
   const addUser=() =>{
@@ -21,6 +22,7 @@ function Form()
       Phone: Info.Phone,
       Desciption: Info.Desciption,
       Picture: Info.Picture,
+      Login: Info.Login,
       })
       .then(res=>{
         console.log(res.data)
