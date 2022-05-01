@@ -7,10 +7,14 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from "./SidebarChat";
 import AddIcon from '@mui/icons-material/Add';
 // import { Link } from "react-router-dom";
-
+var loggedinUser=1;
 function Sidebar(props) {
   
-  const loggedinUser = 3;
+  useEffect(()=>{
+    console.log("inside sidebar ",props.loggedinUser);
+    loggedinUser = props.loggedinUser.idUSER;
+  },[props.loggedinUser])
+
   return (
     <div className="sidebar">
       <div className="sidebar__header">

@@ -15,10 +15,12 @@ import Axios from "axios";
 // const sendMessage = () =>{
 
 // }
-const loggedinUser = 3;
+
 var clickedContact;
 var clicked = false;
+var loggedinUser=1;
 function Chat(props) {
+  
  //----------------------------TAKING message input on chat and sending to backend------------ 
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
@@ -56,6 +58,7 @@ function Chat(props) {
   //   })
   // })
   useEffect(() => {
+
     props.socket.on("receive_message", (data) => {
       
       props.displayMessages(data.RECIVER_id);
@@ -66,6 +69,11 @@ function Chat(props) {
     });
   }, [props.socket]);
 
+  useEffect(()=>{
+    console.log("logged in user in CHAT.js ",props.loggedinUser);
+    loggedinUser = props.loggedinUser.idUSER;
+    console.log("logged in user in CHAT.js later",props.loggedinUser);
+  },[props.loggedinUser])
   //----------------------------------------------------------
     var header=<div className="chat__header">
     <IconButton>
@@ -111,14 +119,22 @@ function Chat(props) {
 
         {props.personalMessages.map((val,key)=>{
           
-          {
+          {clicked=true;
+            props.userList.map((v,k)=>{
+              if(props.contactID==v.idUSER){
+                clickedContact = v;
+              }
+            })
+            
             var attach = <img src=""/>
             
             if(val.ATTACHMENT!=null){
               attach = <img src={val.ATTACHMENT} alt="IMAGE"/>
             }
           if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
-          {clicked=true;
+
+          {
+            clicked=true;
             props.userList.map((v,k)=>{
               if(props.contactID==v.idUSER){
                 clickedContact = v;

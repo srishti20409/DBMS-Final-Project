@@ -7,11 +7,17 @@ import http from 'http'
 import { Server } from "socket.io";
 
 
-<<<<<<< HEAD
-const loggedinUser=3;
-=======
+var loggedinUser={
+  idUSER: 1,
+  USER_phone_number: '9717807100',
+  USER_name: 'ritick',
+  USER_decription: 'HAF',
+  USER_pic: null,
+  USER_online_status: 0,
+  USER_last_seen: null,
+  USER_privacy: null
+} ;
 
->>>>>>> 1283b829fac75a893d9c04b4a55fe65e36da0636
 ///////////////////////////////////////////////////////////
 //app config
 const app = express()
@@ -41,9 +47,10 @@ io.on("connection", (socket) => {
       socket.join(data);
       console.log(`User with ID: ${socket.id} joined room: ${data}`);
     });
-  
+    
+    
+    
     socket.on("send_message", (data) => {
-<<<<<<< HEAD
         console.log("while receiving = ", data.RECIVER_id);
         db.query("INSERT INTO one_one (idMESSAGE,SENDER_id,RECIVER_id,text,sent_time) VALUES (?,?,?,?,?)",[data.idMESSAGE,data.SENDER_id,data.RECIVER_id,data.text,data.sent_time],(err,result)=>{
             if(err){
@@ -54,11 +61,9 @@ io.on("connection", (socket) => {
             }
         })
         
-        socket.to(loggedinUser).emit("receive_message", data);
-=======
+        socket.to(1).emit("receive_message", data);
         console.log("a message was sent = ",data.text);
-        socket.to(4).emit("receive_message", data);
->>>>>>> 1283b829fac75a893d9c04b4a55fe65e36da0636
+        //socket.to(4).emit("receive_message", data);
     });
 
     // socket.on("user_clicked",(data)=>{
@@ -102,7 +107,7 @@ io.on("connection", (socket) => {
 // adds new user
 
 
-app.post('/login1', (req, res) => {
+app.post('/login1', async (req, res) => {
     const Name = req.body.Name;
     const Phone = req.body.Phone;
     const Desciption = req.body.Desciption;
@@ -120,8 +125,26 @@ app.post('/login1', (req, res) => {
         }
       }
     );
+      
+    await db.query("SELECT * from user as u where u.USER_phone_number = "+Phone,(err,result)=>{
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(result);
+        loggedinUser = result;
+        console.log("USER logged in, ",loggedinUser);
+      }
+    })
+    app.get('/setloggedin',(req,res)=>{
+      res.send(loggedinUser);
+      console.log("logged in was set in index.js",loggedinUser);
+    });
+    
+
   });
 ////
+
 
 //SENDS list of users from DB to frontend(sidebar.js)
 app.get('/users',(req,res)=>{
@@ -136,7 +159,7 @@ app.get('/users',(req,res)=>{
 });
 //SENDS list of messages from DB to frontend(sidebarChat.js)
 app.get('/messages',(req,res)=>{
-    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time FROM one_one as m where m.SENDER_id = 4 or m.RECIVER_id = 4",(err,result)=>{
+    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time FROM one_one as m where m.SENDER_id = "+loggedinUser.idUSER+" or m.RECIVER_id = "+loggedinUser.idUSER,(err,result)=>{
         if(err){
             console.log(err);
         }
