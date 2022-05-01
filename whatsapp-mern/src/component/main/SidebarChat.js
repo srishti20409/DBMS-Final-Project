@@ -20,14 +20,6 @@ function SidebarChat(props) {
                 }
               })()} 
             </p>
-              {/* <View>
-              {(() => {
-                  if (props.val.privacy==1){
-                      return (<p>status {props.val.USER_online_status}</p>)}
-                  else{
-                    return (<p>status {props.val.idUSER}</p>)}
-                })()}
-            </View> */}
         </div>
     </div>
   )

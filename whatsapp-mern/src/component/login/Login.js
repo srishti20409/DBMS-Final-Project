@@ -8,6 +8,16 @@ import Main from "../main/Main";
 function Form() 
 {
     const [Phone , setPhone] = useState("");
+    const login_user = () =>{
+        axios.post('http://localhost:3001/login2',
+        {
+            Phone: Phone,
+        })
+        .then(res=>{
+            console.log(res.data)
+          })
+    }
+
     
     return (
         <div className="App">
@@ -31,8 +41,10 @@ function Form()
                 </div>
 
                 <div className="footer">
-                <button onClick=  {(event) => {alert("FORM SUBMITTED");console.log(Phone)}} >
+                <button onClick={login_user}>
+                    <Link to = '/'>
                     Enter
+                    </Link>
                 </button>
                 </div>
 

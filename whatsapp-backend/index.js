@@ -135,6 +135,27 @@ app.post('/login1', async (req, res) => {
   });
 ////
 
+//////login
+
+app.post('/login2', async (req, res) => {
+  const Phone = req.body.Phone;
+ 
+  await db.query("SELECT * from user as u where u.USER_phone_number = "+Phone,(err,result)=>{
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(result);
+      loggedinUser=result;
+      console.log("USER logged in, ",loggedinUser);
+      lg=loggedinUser[0].idUSER;
+    }
+  })
+  app.get('/setloggedin',(req,res)=>{
+    res.send(loggedinUser);
+    console.log("logged in was set in index.js",lg);
+  });
+});
 
 //SENDS list of users from DB to frontend(sidebar.js)
 app.get('/users',(req,res)=>{
