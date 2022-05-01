@@ -32,6 +32,11 @@
     height: 5vh;
     background-color: rgb(209, 209, 209);
     border-radius: 25px;
+    
+}
+
+.cell input{
+    color:black;
 }
 
 .create button{

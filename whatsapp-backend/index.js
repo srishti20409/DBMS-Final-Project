@@ -84,16 +84,16 @@ io.on("connection", (socket) => {
 // adds new user
 
 
-app.post('/login', (req, res) => {
+app.post('/login1', (req, res) => {
     const Name = req.body.Name;
     const Phone = req.body.Phone;
     const Desciption = req.body.Desciption;
     const Picture = req.body.Picture;
-    const login = req.body.Login;
+    const Login = req.body.Login;
   
     db.query(
       "INSERT INTO USER ( USER_name, USER_phone_number, USER_decription, USER_pic , USER_online_status) VALUES (?,?,?,?,?)",
-      [Name, Phone, Desciption, Picture,Login],
+      [Name, Phone, Desciption, Picture, Login],
       (err, result) => {
         if (err) {
           console.log(err);

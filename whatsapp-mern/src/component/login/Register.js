@@ -17,7 +17,7 @@ function Form()
 
   const addUser=() =>{
   
-      axios.post('http://localhost:3001/login',{
+      axios.post('http://localhost:3001/login1',{
       Name: Info.Name,
       Phone: Info.Phone,
       Desciption: Info.Desciption,
@@ -77,7 +77,9 @@ function Form()
 
             <div className="footer">
               <button onClick= {addUser} >
-                Enter
+                <Link to = '/'>
+                  Enter
+                </Link>
               </button>
             </div>
 
