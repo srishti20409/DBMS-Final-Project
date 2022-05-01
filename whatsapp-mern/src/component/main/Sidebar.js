@@ -7,7 +7,8 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from "./SidebarChat";
 import AddIcon from '@mui/icons-material/Add';
 // import { Link } from "react-router-dom";
-var loggedinUser=1;
+var loggedinUser=(0);
+
 function Sidebar(props) {
   
   useEffect(()=>{
@@ -21,12 +22,10 @@ function Sidebar(props) {
         <IconButton>
           <Avatar src="https://avatars.githubusercontent.com/u/20063?v=4" />
         </IconButton>
+        <p style ={{color: 'white'}}>{props.loggedinUser.USER_name}</p>
         <div className="sidebar__headerRight">
           <IconButton href="http://localhost:3000/creategroup"  rel="noopener noreferrer">
             <AddIcon/>
-          </IconButton>
-          <IconButton>
-            <ChatIcon />
           </IconButton>
           <IconButton>
             <MoreVertIcon />
