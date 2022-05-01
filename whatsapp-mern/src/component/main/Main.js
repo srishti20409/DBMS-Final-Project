@@ -57,7 +57,6 @@ function Main() {
       });
     }, []);
 
-
   //GETT all USERS in a list to display on sidebar
   const [userList, setUserList] = useState([]);
   useEffect(() => {

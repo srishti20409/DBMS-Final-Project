@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
-.App {
+.App2 {
   background: rgb(16, 113, 120);
   background: radial-gradient(
     circle,
@@ -14,13 +14,13 @@
   place-items: center;
 }
 
-body {
+body2 {
   margin: 0%;
   padding: 0%;
   font-family: montserrat, arial, verdana;
 }
 
-.form {
+.form2 {
   width: 100%;
   height: 100%;
   display: flex;
@@ -29,7 +29,7 @@ body {
   align-items: center;
 }
 
-.form-container {
+.form-container2 {
   width: 400px;
   height: 400px;
   background-color: white;
@@ -39,23 +39,23 @@ body {
   flex-direction: column;
 }
 
-.form-container .header {
+.form-container2 .header {
   flex: 20%;
   display: grid;
   place-items: center;
 }
 
-.form-container .body {
+.form-container2 .body {
   flex: 60%;
 }
 
-.form-container .footer {
+.form-container2 .footer {
   flex: 20%;
   display: flex;
   justify-content: center;
 }
 
-.button-container{
+.button-container2{
   width: 400px;
   height: 400px;
   background-color: white;
@@ -67,7 +67,7 @@ body {
   align-items: center;
 }
 
-.button-container button
+.button-container2 button
 {
   width: 200px;
   height: 80px;
@@ -85,7 +85,7 @@ body {
   
 }
 
-.form-container .footer button {
+.form-container2 .footer button {
   border-radius: 7px;
   width: 100px;
   height: 40px;
@@ -100,7 +100,7 @@ body {
   margin: 5px;
 }
 
-.sign-up-container {
+.sign-up-container2 {
   height: 100%;
   width: 100%;
   display: flex;
@@ -109,7 +109,7 @@ body {
   align-items: center;
 }
 
-.sign-up-container input {
+.sign-up-container2 input {
   margin: 5px;
   width: 200px;
   height: 40px;
@@ -117,7 +117,7 @@ body {
   font-size: 20px;
 }
 
-.personal-info-container {
+.personal-info-container2 {
   height: 100%;
   width: 100%;
   display: flex;
@@ -126,7 +126,7 @@ body {
   align-items: center;
 }
 
-.personal-info-container input {
+.personal-info-container2 input {
   margin: 5px;
   width: 200px;
   height: 40px;
@@ -157,7 +157,7 @@ body {
   align-items: center;
 }
 
-.other-info-container input {
+.other-info-container2 input {
   margin: 5px;
   width: 200px;
   height: 40px;

@@ -9,6 +9,7 @@ function List
 () {
     
     const [MemberList, setMemberList] = useState([]);
+    {console.log(MemberList)}
     const [userList, setUserList] = useState([]);
     useEffect(() => {
       Axios.get("http://localhost:3001/users").then((response) => {
@@ -21,7 +22,7 @@ function List
             <div className="List">
                 {userList.map((val,key)=>
                 {
-                    return(<Cell val={val}/>)
+                    return(<Cell val={val} MemberList={MemberList}/>)
                 })
                 }
 
