@@ -9,7 +9,7 @@ import SidebarChat from "./SidebarChat";
 
 function Sidebar(props) {
   
-  const loggedinUser = 4;
+  const loggedinUser = 3;
   return (
     <div className="sidebar">
       <div className="sidebar__header">

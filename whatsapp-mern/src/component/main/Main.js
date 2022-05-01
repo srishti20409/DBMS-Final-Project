@@ -14,7 +14,7 @@ function Main() {
   const [personalMessages, setpersonalMessages] = useState([]);
   const [userClicked, setuserClicked] = useState(false);
 
-  const loggedinUser = 4;
+  const loggedinUser = 3;
     
     const displayMessages= (userId)=>{
       console.log("clicked user = ",contactID);
@@ -25,7 +25,7 @@ function Main() {
       // socket.emit("user_clicked",contactID);
     }
     useEffect(() => {
-      socket.emit("join_room",4)
+      socket.emit("join_room",loggedinUser)
       Axios.get("http://localhost:3001/allmessages").then((response) => {
         setMessages(response.data);
       });

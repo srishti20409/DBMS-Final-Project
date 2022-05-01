@@ -15,7 +15,7 @@ import Axios from "axios";
 // const sendMessage = () =>{
 
 // }
-const loggedinUser = 4;
+const loggedinUser = 3;
 var clickedContact;
 var clicked = false;
 function Chat(props) {
@@ -110,15 +110,20 @@ function Chat(props) {
       <div className="chat__body">
 
         {props.personalMessages.map((val,key)=>{
-            
-          {clicked=true;
+          
+          {
             var attach = <img src=""/>
             
             if(val.ATTACHMENT!=null){
               attach = <img src={val.ATTACHMENT} alt="IMAGE"/>
             }
           if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
-          {
+          {clicked=true;
+            props.userList.map((v,k)=>{
+              if(props.contactID==v.idUSER){
+                clickedContact = v;
+              }
+            })
           return(<p key={val.idMESSAGE} className="chat__message chat__reciever">
           <span className="chat__name"></span>
           {val.text}
@@ -128,7 +133,7 @@ function Chat(props) {
           </p>)}
 
           else if(val.SENDER_id==props.contactID){
-          
+            clicked=true;
           props.userList.map((v,k)=>{
             if(props.contactID==v.idUSER){
               clickedContact = v;

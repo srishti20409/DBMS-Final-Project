@@ -7,7 +7,7 @@ import http from 'http'
 import { Server } from "socket.io";
 
 
-const loggedinUser=4;
+const loggedinUser=3;
 ///////////////////////////////////////////////////////////
 //app config
 const app = express()
@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
             }
         })
         
-        socket.to(4).emit("receive_message", data);
+        socket.to(loggedinUser).emit("receive_message", data);
     });
 
     // socket.on("user_clicked",(data)=>{
