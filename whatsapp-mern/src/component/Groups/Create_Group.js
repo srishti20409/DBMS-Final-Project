@@ -2,13 +2,13 @@ import React , {useState} from 'react';
 import "./group.css"
 import { Link } from 'react-router-dom';
 
-function Create_Group() {
+function Create_Group() 
+{
     const [Info, setInfo] = useState({
         Name: "",
         Desciption: "",
         Picture: "",
       })
-
     return (
         <div className='main'>  
             <div className="Main__body">
