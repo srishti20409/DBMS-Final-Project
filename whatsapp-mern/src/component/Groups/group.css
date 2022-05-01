@@ -1,0 +1,119 @@
+.main2{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background-color: #09171c;
+    align-items: center;
+  }
+  
+  
+  .Main__body2{
+      display: flex;
+      background-color: #eaeaea;
+      margin-top: 0px;
+      height: 90vh;
+      width: 90vw;
+      box-shadow: 0px 0px 40px #243f45;
+      border: 0.25px solid white;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .form {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      /* .form-container {
+        width: 400px;
+        height: 400px;
+        background-color: rgb(147, 119, 119);
+        border-radius: 8px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+      } */
+      
+      .Main__body2 .header {
+        flex: 15%;
+        display: grid;
+        place-items: center;
+        font-size: larger;
+      }
+      
+      .Main__body2 .body {
+        flex: 70%;
+      }
+      
+      .Main__body2 .footer {
+        flex: 15%;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .button-container{
+        width: 400px;
+        height: 400px;
+        background-color: #eaeaea ;
+        border-radius: 8px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .button-container button
+      {
+        width: 200px;
+        height: 80px;
+        background-color: rgb(0, 0, 0);
+        font-weight: bold;
+        color: #eaeaea;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        font-size: large;
+        border-radius: 20px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        
+      }
+      
+      .Main__body2 .footer button {
+        width: 200px;
+        height: 80px;
+        background-color: #243f45;
+        font-weight: bolder;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        margin: 5px;
+        font-size: larger;
+        border-radius: 17px;
+      }
+
+      .sign-up-container input {
+        margin: 5px;
+        width: 300px;
+        height: 80px;
+        padding-left: 5px;
+        font-size: 20px;
+        border-radius: 20px;
+        border: 2px solid black;
+      }
+
+      .sign-up-container p{
+          font-size: large;
+          font-weight: 900;
+      }

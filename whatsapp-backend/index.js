@@ -7,7 +7,11 @@ import http from 'http'
 import { Server } from "socket.io";
 
 
+<<<<<<< HEAD
 const loggedinUser=3;
+=======
+
+>>>>>>> 1283b829fac75a893d9c04b4a55fe65e36da0636
 ///////////////////////////////////////////////////////////
 //app config
 const app = express()
@@ -39,6 +43,7 @@ io.on("connection", (socket) => {
     });
   
     socket.on("send_message", (data) => {
+<<<<<<< HEAD
         console.log("while receiving = ", data.RECIVER_id);
         db.query("INSERT INTO one_one (idMESSAGE,SENDER_id,RECIVER_id,text,sent_time) VALUES (?,?,?,?,?)",[data.idMESSAGE,data.SENDER_id,data.RECIVER_id,data.text,data.sent_time],(err,result)=>{
             if(err){
@@ -50,6 +55,10 @@ io.on("connection", (socket) => {
         })
         
         socket.to(loggedinUser).emit("receive_message", data);
+=======
+        console.log("a message was sent = ",data.text);
+        socket.to(4).emit("receive_message", data);
+>>>>>>> 1283b829fac75a893d9c04b4a55fe65e36da0636
     });
 
     // socket.on("user_clicked",(data)=>{
@@ -88,6 +97,32 @@ io.on("connection", (socket) => {
 // });
 
 
+
+
+// adds new user
+
+
+app.post('/login1', (req, res) => {
+    const Name = req.body.Name;
+    const Phone = req.body.Phone;
+    const Desciption = req.body.Desciption;
+    const Picture = req.body.Picture;
+    const Login = req.body.Login;
+  
+    db.query(
+      "INSERT INTO USER ( USER_name, USER_phone_number, USER_decription, USER_pic , USER_online_status) VALUES (?,?,?,?,?)",
+      [Name, Phone, Desciption, Picture, Login],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send("Values Inserted");
+        }
+      }
+    );
+  });
+////
+
 //SENDS list of users from DB to frontend(sidebar.js)
 app.get('/users',(req,res)=>{
     db.query("SELECT * FROM dbms.user",(err,result)=>{
@@ -101,7 +136,7 @@ app.get('/users',(req,res)=>{
 });
 //SENDS list of messages from DB to frontend(sidebarChat.js)
 app.get('/messages',(req,res)=>{
-    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time,ATTACHMENT FROM one_one as m where m.SENDER_id = "+loggedinUser+" or m.RECIVER_id = "+loggedinUser,(err,result)=>{
+    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time FROM one_one as m where m.SENDER_id = 4 or m.RECIVER_id = 4",(err,result)=>{
         if(err){
             console.log(err);
         }
