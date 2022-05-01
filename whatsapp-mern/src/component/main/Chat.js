@@ -141,11 +141,17 @@ function Chat(props) {
             
             var attach = <img src=""/>
             
-            if(val.ATTACHMENT!=null){
+            if(val.ATTACHMENT!=null && !val.ATTACHMENT.includes("youtube")){
+              console.log("attaching somethingg");
               attach = <img src={val.ATTACHMENT} alt="IMAGE"/>
             }
-          if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
+            
+            else if(val.ATTACHMENT!=null){
+              //its a video
+              attach=<iframe width="560" height="315" src={val.ATTACHMENT} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+            }
+          if(val.SENDER_id==loggedinUser && val.RECIVER_id==props.contactID)
           {
             clicked=true;
             props.userList.map((v,k)=>{
@@ -171,6 +177,7 @@ function Chat(props) {
           return(<p key={val.idMESSAGE} className="chat__message">
           <span className="chat__name">{clickedContact.USER_name}</span>
           {val.text}
+          {attach}
           <span className="chat__timestamp">{val.sent_time}</span>
         </p>)
         }}

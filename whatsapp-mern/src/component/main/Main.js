@@ -29,8 +29,8 @@ function Main() {
   const [personalMessages, setpersonalMessages] = useState([]);
   const [userClicked, setuserClicked] = useState(false);
 
-
-
+  const [groups, setGroups] = useState([]);
+  const [groupchat, setGroupchat] = useState([]);
 
 
   //display all the messages of ths clicked user
@@ -50,6 +50,12 @@ function Main() {
       });
     }, []);
 
+    useEffect(() => {
+      socket.emit("join_room",1); 
+      Axios.get("http://localhost:3001/groups").then((response) => {
+        setGroups(response.data);
+      });
+    }, []);
 
 
   //GETT all USERS in a list to display on sidebar
@@ -61,6 +67,12 @@ function Main() {
     });
   }, []);
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/groupchat").then((response) => {
+      setGroupchat(response.data);
+      
+    });
+  }, []);
 
   //gets the logged in user details
   useEffect(()=>{
@@ -76,7 +88,7 @@ function Main() {
     <div className='main'> 
         <div className="Main__body">
         <Sidebar displayMessages={displayMessages} userList={userList} loggedinUser={loggedinUser}/>
-        <Chat messages={messages} clicked={clicked} displayMessages={displayMessages} loggedinUser={loggedinUser} personalMessages={personalMessages} userList={userList} contactID={contactID} socket={socket}/>
+        <Chat groups={groups} groupchat={groupchat} messages={messages} clicked={clicked} displayMessages={displayMessages} loggedinUser={loggedinUser} personalMessages={personalMessages} userList={userList} contactID={contactID} socket={socket}/>
         </div>  
     </div>
   )

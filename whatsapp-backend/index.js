@@ -168,9 +168,33 @@ app.get('/users',(req,res)=>{
         }
     });
 });
+
+
+app.get('/groups',(req,res)=>{
+  db.query("SELECT * FROM dbms.groups",(err,result)=>{
+      if(err){
+          console.log(err);
+      }
+      else{
+          res.send(result);
+      }
+  });
+});
+
+app.get('/groupchat',(req,res)=>{
+  db.query("SELECT * FROM dbms.message as m JOIN group_chat as g on m.idMESSAGE = g.Message_id",(err,result)=>{
+      if(err){
+          console.log(err);
+      }
+      else{
+          res.send(result);
+      }
+  });
+});
+
 //SENDS list of messages from DB to frontend(sidebarChat.js)
 app.get('/messages',(req,res)=>{
-    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time FROM one_one as m where m.SENDER_id = "+lg+" or m.RECIVER_id = "+lg,(err,result)=>{
+    db.query("SELECT idMESSAGE,SENDER_id,RECIVER_id,text,sent_time,ATTACHMENT FROM one_one as m where m.SENDER_id = "+lg+" or m.RECIVER_id = "+lg,(err,result)=>{
         if(err){
             console.log(err);
         }
