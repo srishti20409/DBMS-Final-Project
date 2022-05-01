@@ -30,9 +30,6 @@ function Main() {
   const [userClicked, setuserClicked] = useState(false);
 
 
-
-
-
   //display all the messages of ths clicked user
     const displayMessages= (userId)=>{
       console.log("clicked user = ",contactID);
@@ -49,7 +46,6 @@ function Main() {
         setMessages(response.data);
       });
     }, []);
-
 
 
   //GETT all USERS in a list to display on sidebar
