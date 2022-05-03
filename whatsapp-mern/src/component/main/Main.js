@@ -1,10 +1,12 @@
-import React,{ useEffect }  from 'react'
+import React,{ useEffect , useState  }  from 'react'
 import Chat from "./Chat";
 import Sidebar from "./Sidebar";
 import "./Main.css"
 import Axios from "axios";
-import { useState } from "react";
 import io from "socket.io-client";
+import { Button } from '@mui/material';
+import {Link} from 'react-router-dom'
+import axios from 'axios';
 const socket = io.connect("http://localhost:3002");//socket.io on 3002
 
 
@@ -28,7 +30,6 @@ function Main() {
   const [messages, setMessages] = useState([]);
   const [personalMessages, setpersonalMessages] = useState([]);
   const [userClicked, setuserClicked] = useState(false);
-
   const [groups, setGroups] = useState([]);
   const [groupchat, setGroupchat] = useState([]);
 
@@ -83,12 +84,31 @@ function Main() {
 
 //----------------------------------------------------------
 
+    const logout_user = () =>{
+        axios.post('http://localhost:3001/logout',
+        {
+            USERid: loggedinUser.idUSER,
+        })
+        .then(res=>{
+            console.log(res.data)
+          })
+    }
+
+//-----------------
+
   return (
     <div className='main'> 
         <div className="Main__body">
         <Sidebar displayMessages={displayMessages} userList={userList} loggedinUser={loggedinUser}/>
         <Chat groups={groups} groupchat={groupchat} messages={messages} clicked={clicked} displayMessages={displayMessages} loggedinUser={loggedinUser} personalMessages={personalMessages} userList={userList} contactID={contactID} socket={socket}/>
-        </div>  
+        </div> 
+        <div className='logout'>
+          <Button onClick={logout_user}>
+            <Link to = "/landing">
+              logout
+            </Link>
+          </Button> 
+        </div>
     </div>
   )
 }

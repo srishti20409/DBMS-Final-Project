@@ -98,7 +98,8 @@ io.on("connection", (socket) => {
 // adds new user
 //post - insert into data base
 let lg;
-app.post('/login1', async (req, res) => {
+app.post('/login1', async (req, res) => 
+{
     const Name = req.body.Name;
     const Phone = req.body.Phone;
     const Desciption = req.body.Desciption;
@@ -155,6 +156,22 @@ app.post('/login2', async (req, res) => {
     res.send(loggedinUser);
     console.log("logged in was set in index.js",lg);
   });
+});
+
+
+app.post('/logout', async (req, res) => {
+  const id = req.body.idUSER;
+  await db.query("UPDATE USER set USER_online_status = REPLACE(USER_online_status,1) where idUSER = "+ id,(err,result)=>{
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(result);
+      loggedinUser=result;
+      console.log("USER logged out, ",id);
+      lg=loggedinUser[0].idUSER;
+    }
+  })
 });
 
 //SENDS list of users from DB to frontend(sidebar.js)

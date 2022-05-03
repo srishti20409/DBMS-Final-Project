@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./Form.css"
 import axios from "axios";
-import { SettingsSuggestRounded } from "@mui/icons-material";
 import { Link } from 'react-router-dom';
-import Main from "../main/Main";
 
 function Form() 
 {
@@ -17,7 +15,6 @@ function Form()
             console.log(res.data)
           })
     }
-
     
     return (
         <div className="App">

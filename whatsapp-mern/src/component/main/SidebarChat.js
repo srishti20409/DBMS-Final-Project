@@ -1,7 +1,6 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
 import './SidebarChat.css'
-import { View} from "react";
 
 function SidebarChat(props) {
   const displayMessage=()=>{

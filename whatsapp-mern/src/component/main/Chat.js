@@ -61,19 +61,14 @@ function Chat(props) {
   useEffect(() => {
 
     props.socket.on("receive_message", (data) => {
-      
       props.displayMessages(data.RECIVER_id);
-      
       setMessageList((list) => [...list, data]);
-      
       console.log("a message was recieved");
     });
   }, [props.socket]);
 
   useEffect(()=>{
-   
     loggedinUser = props.loggedinUser.idUSER;
-
   },[props.loggedinUser])
 
   useEffect(()=>{

@@ -3,16 +3,28 @@
   place-items: center;
   height: 100vh;
   background-color: #09171c;
+  justify-content: center;
+  align-items: center;
 }
 
+.logout{
+  height: 90vh;
+  margin-top: 5px;
+}
+
+.logout button {
+  background-color: white;
+} 
 
 .Main__body{
     display: flex;
     background-color: #ededed;
-    margin-top: -50px;
-    height: 90vh;
-    width: 90vw;
+    height: 80vh;
+    width: 80vw;
+    margin-top: 8vh;
     box-shadow: 0px 0px 40px #243f45;
     border: 0.25px solid white;
     border-radius: 10px;
   }
+
+ 

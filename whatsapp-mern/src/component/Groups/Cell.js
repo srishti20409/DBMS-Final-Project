@@ -1,14 +1,6 @@
 import React from 'react'
 import "./style.css";
 
-var arr= [];
-
-//    function myFunction(input) {
-//             arr.push(input);
-//             alert(arr);
-//             console.log(arr);
-//     }
-
 
 function Cell(props) {
     return (

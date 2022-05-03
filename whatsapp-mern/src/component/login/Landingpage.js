@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Form.css"
 import { Link } from "react-router-dom";
 
@@ -13,9 +13,7 @@ import { Link } from "react-router-dom";
             </button>
             <button>
                 <Link to = "/register" style={{ color: 'inherit', textDecoration: 'inherit'}}>Register</Link>
-            </button>
-           
-            
+            </button> 
         </div>
       </div>
     </div>
