@@ -1,0 +1,79 @@
+CREATE DATABASE dbms;
+use dbms;
+
+CREATE TABLE `USER` (
+  `idUSER` int unsigned NOT NULL AUTO_INCREMENT,
+  `USER_phone_number` char(10) NOT NULL,
+  `USER_name` varchar(25) NOT NULL,
+  `USER_decription` varchar(500) NOT NULL,
+  `USER_pic` varchar(5000) DEFAULT NULL,
+  `USER_online_status` tinyint NULL,
+  `USER_last_seen` datetime NULL,
+  `USER_privacy` tinyint NULL,
+  PRIMARY KEY (`idUSER`),
+  UNIQUE KEY `USER_phone_number_UNIQUE` (`USER_phone_number`)
+);
+
+CREATE TABLE `GROUPS` (
+  `idGROUP` int unsigned NOT NULL AUTO_INCREMENT,
+  `GROUP_name` varchar(25) NOT NULL,
+  `GROUP_picture` varchar(5000) DEFAULT NULL,
+  `GROUP_total_members` tinyint unsigned NOT NULL,
+  PRIMARY KEY (`idGROUP`)
+);
+
+CREATE TABLE `GROUP_MEMBERS` (
+  `id_MEMBERS` int unsigned NOT NULL AUTO_INCREMENT,
+  `USER_id` int unsigned NOT NULL,
+  `GROUP_id` int unsigned NOT NULL,
+  `MEMBER_role` tinyint NOT NULL,
+  PRIMARY KEY (`id_MEMBERS`),
+  FOREIGN KEY (`GROUP_id`) REFERENCES `GROUPS`(`idGROUP`),
+  FOREIGN KEY (`USER_id`) REFERENCES `USER`(`idUSER`)
+);
+
+CREATE TABLE `ONE-ONE` (
+  `idMESSAGE` int NOT NULL AUTO_INCREMENT,
+  `SENDER_id` int unsigned NOT NULL,
+  `RECIVER_id` int unsigned NOT NULL,
+  `text` varchar(1000) DEFAULT NULL,
+  `ATTACHMENT` varchar(1000) DEFAULT NULL,
+  `sent_time` datetime DEFAULT NULL,
+  `recived_time` datetime DEFAULT NULL,
+  `read_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`idMESSAGE`),
+  FOREIGN KEY (`SENDER_id`) REFERENCES `USER` (`idUSER`),
+  FOREIGN KEY (`RECIVER_id`) REFERENCES `USER` (`idUSER`)
+);
+
+
+
+CREATE TABLE `GROUP_CHAT` (
+  `idGROUP_CHAT` int unsigned NOT NULL AUTO_INCREMENT,
+  `GROUP_id` int unsigned NOT NULL,
+  `Message_id` int unsigned NOT NULL,
+  `MESSAGE_SENDER_id` int unsigned NOT NULL,
+  `MEMBERS_USER_id` int unsigned NOT NULL,
+  `sent_time` datetime DEFAULT NULL,
+  `recieved_time` datetime DEFAULT NULL,
+  `read_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`idGROUP_CHAT`),
+  FOREIGN KEY (`GROUP_id`) REFERENCES `GROUPS` (`idGROUP`),
+  FOREIGN KEY (`MEMBERS_USER_id`) REFERENCES `GROUP_MEMBERS` (`USER_id`),
+  FOREIGN KEY (`Message_id`) REFERENCES `Message` (`idMessage`)
+);
+
+CREATE TABLE `CONTACTS` (
+  `USER_id` int unsigned NOT NULL,
+  `CONTACTS_id` int unsigned NOT NULL,
+  PRIMARY KEY (`USER_id`,`CONTACTS_id`),
+  FOREIGN KEY (`CONTACTS_id`) REFERENCES `USER` (`idUSER`),
+  FOREIGN KEY (`USER_id`) REFERENCES `USER` (`idUSER`)
+);
+
+CREATE TABLE `Message` (
+  `idMessage` int unsigned NOT NULL AUTO_INCREMENT,
+  `Message_text` varchar(4500) NOT NULL,
+  `Message_attachment` varchar(4500) DEFAULT NULL,
+  PRIMARY KEY (`idMessage`)
+)
